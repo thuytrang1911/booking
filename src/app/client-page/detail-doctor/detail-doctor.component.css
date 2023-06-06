@@ -1,0 +1,158 @@
+.container{
+    /* height: 500px; */
+    width: 100%;
+    padding-top:20px ;
+}
+ .intro-doctor{
+display: flex;
+height: 150px;
+padding-top: 20px;
+/* border: 1px solid black; */
+border-bottom: 1px solid black;
+}
+.intro-doctor .content-left{
+    width:15%;
+    position: relative;
+}
+.content-left .img-doctor{
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    position: absolute;
+    left: 25%;
+}
+.img-doctor .avatar{
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+}
+.intro-doctor .conten-right{
+    width:80%;
+    display: flex;
+    flex-direction: column;
+   
+}
+.conten-right .up{
+    font-weight: 600;
+    font-size: 20px;
+    color: black;
+}
+.detail-intro{
+    /* height: 300px; */
+    width: 100%;
+    /* border: 1px solid black; */
+    color: black;
+    background-color: #eee;
+    padding-top: 20px;
+}
+
+.detail-intro .title h3{
+    font-size: 17px;
+    margin-left: 50px;
+}
+.detail-intro .discription{
+    margin-left: 70px;
+}
+.schedule-doctor{
+    height: 250px;
+    width: 100%;
+ display: flex;
+}
+.schedule-doctor .schedule-left{
+    width: 50%;
+    /* border-right: 1px solid black; */
+}
+.schedule-doctor .all-schedule{
+    padding-left: 50px;
+    padding-top: 10px;
+}
+.all-schedule select{
+    width: 150px;
+}
+
+.pick-time h3{
+    font-size: 17px;
+    /* color: black; */
+    padding-left: 50px;
+    padding-top: 5px;
+}
+.pick-time .time-content{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-left: 50px;
+}
+.time-content button{
+    background-color: yellow;
+    min-width: 120px;
+  min-height: 45px;
+ 
+}
+ .pick-time-title span{
+    padding-left: 50px;
+    padding-top: 10px;
+}
+.schedule-right{
+   border: none;
+   box-shadow: 10px 10px 5px 5px #888888;
+   right: 0px;
+}
+.schedule-right h3{
+padding-left: 20px;
+padding-top: 20px;
+font-size: 17px;
+border-bottom: 1px solid;
+}
+.schedule-right h4{
+    padding-left: 20px;
+    padding-top: 20px;
+    font-size: 14px;
+    color: #8D8E92;
+
+}
+.panel-body{
+    display: flex;
+    width: 200px;
+}
+.form-group{
+    padding-bottom: 20px;
+}
+.appointment{
+    height: 100px;
+    width: 100%;
+    display: flex;
+}
+.info-left{
+    width: 30%;
+    /* padding: 5px; */
+    position: relative;
+}
+.info-left .img-left-doctor{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    position: absolute;
+    left: 15%;
+}
+.img-left-doctor .anh{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+.info-right{
+    width: 70%;
+    height: 100%;
+
+}
+.info-right .up{
+    height: 33%;
+   border-bottom: 1px solid black;
+}
+.info-right .mid{
+    height: 33%;
+    border-bottom: 1px solid black;
+}
+.info-right .down{
+height: 33%;
+
+}

@@ -1,0 +1,200 @@
+<div class="container">
+    <div class="intro-doctor" *ngIf="item">
+        <div  class="content-left">
+            <div 
+             class="img-doctor">
+                <img class="avatar" src="{{item.avatar}}" alt="">
+            </div>
+        </div>
+        <div class="conten-right">
+            <div class="up">
+               {{item.docName}}
+            </div>
+            <div class="down">
+               {{item.description}}
+            </div>
+        </div>
+    </div>
+    <div class="schedule-doctor">
+        <div class="schedule-left">
+            <div class="all-schedule">
+                <form [formGroup]="frmSearch" class="form-horizontal" (ngSubmit)="LoadData()" >
+                    <div class="panel panel-flat">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-lg-10">
+                                   
+										<input formControlName="currentNumber" type="date" class="form-control" min="2050-01-01" onfocus="this.min=new Date().toISOString().split('T')[0]" 
+                                        placeholder="Chọn ngày">
+									
+                                </div>
+                            </div> 
+                            <div class="col-lg-10 text-right">
+                                <button  type="submit" class="btn btn-primary" ><i class="icon-search4 position-right"></i> Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div  class="pick-time">
+                <h3><i class="fa fa-calendar" aria-hidden="true"></i> Lịch khám</h3>
+                <div class="time-content" >
+                   <button (click)="createModal()" *ngFor="let it of list_item" (click)="getTime(it.timeId)"  (click)="getSchedule(it.id)">
+					{{it.timeValue}}
+				</button><br>
+                </div><br>
+               
+             
+            </div>
+        </div>
+        <!-- <div class="schedule-right">
+            <h3>ĐỊA CHỈ: Phòng khám nha khoa Klinik</h3>
+            <h4>Phường Nhân Hòa, Bần Yên Nhân, Mỹ Hào, Hưng Yên </h4>
+            <h4>*Klinik giúp bạn có một nụ cười tự tin*</h4>
+            <div class="pick-time-title">
+                <span>Chọn và đặt lịch miễn phí</span>
+            </div>
+        </div> -->
+    </div>
+    <div class="detail-intro">
+        <div class="title">
+            <h3>Bằng cấp và chứng nhận</h3></div>
+        <div class="discription">
+            <ul>
+                <li>Đạt chuẩn chứng nhận hội răng hàm mặt ICD</li>
+                <li>Tốt nghiệp trường răng hàm mặt loại xuất sắc</li>
+                <li>Có 10 năm kinh nghiệm làm việc</li>
+                <li>Bác sĩ trưởng tại khoa</li>
+            </ul>
+        </div>
+        <div class="title">
+            <h3>Phó giáo sư khám và điều trị</h3></div>
+        <div class="discription">
+            <ul>
+                <li>Đau răng do ê buốt</li>
+                <li>Hỏng men răng</li>
+                <li>Răng bị hỏng tủy</li>
+                <li>Chỉnh hình hàm răng</li>
+                <li>Cắm răng giả</li>
+            </ul>
+        </div>
+    </div>
+</div>
+  <!-- Modal -->
+  <div *ngIf="showUpdateModal"  class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLongTitle">Đặt lịch hẹn</h5>
+		  <button  (click)="closeModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		
+		</div>
+		
+		<form *ngIf="doneSetupForm" [formGroup]="frmUser" (ngSubmit)="OnSubmit(frmUser.value)" >
+			<div class="form-group">
+				<div class="appointment" >
+					<div class="info-left" >
+						<div class="img-left-doctor" *ngIf="item">
+						<img class="anh" src="{{item.avatar}}" alt="">
+					</div>
+					</div>
+					<div class="info-right" *ngIf="item">
+						<div class="up" >
+							<span >Nha sĩ: </span>{{item.docName}}
+						 </div>
+						 <div class="mid" *ngIf=" item_schedule">
+							<span>Ngày hẹn: {{item_schedule.currentNumber|date:'dd/MM/yyyy'}}</span>
+						 </div>
+						 <div class="down" *ngIf="item_time" >
+							<span>Thời gian: </span>{{item_time.timeValue}}
+						 </div>
+					</div>
+				</div>
+
+			</div>
+			
+			<div class="modal-body" >		
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Họ và tên:</label>
+					<div class="col-lg-12">
+						<input formControlName="cusName" type="text" class="form-control" placeholder="Họ tên">
+						<div *ngIf="hoten.invalid && (hoten.dirty || hoten.touched)">
+							<div *ngIf="hoten.errors?.['required']" style="color:red ;">Họ tên không được rỗng</div>
+							<div *ngIf="hoten.errors?.['minlength']" style="color:red ;">
+								Họ tên không được nhỏ hơn 3 ký tự
+							</div>
+							<div *ngIf="hoten.errors?.['maxlength']" style="color:red ;">
+								Họ tên không được lớn hơn 250 ký tự
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Ngày sinh:</label>
+					<div class="col-lg-12">
+						<input formControlName="birthDay" type="date" class="form-control" placeholder="Ngày sinh">
+						<div *ngIf="ngaysinh.invalid && (ngaysinh.dirty || ngaysinh.touched)">
+							<div *ngIf="ngaysinh.errors?.['required']" style="color:red ;">Ngày sinh không được rỗng
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Số điện thoại:</label>
+					<div class="col-lg-12">
+						<input formControlName="phone" type="text" class="form-control" placeholder="Số điện thoại">
+						<div *ngIf="dienthoai.invalid && (dienthoai.dirty || dienthoai.touched)">
+							<div *ngIf="dienthoai.errors?.['pattern']" style="color:red ;">Không đúng định dạng số
+								điện thoại!</div>
+						</div>
+					</div>
+				</div>	
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Email:</label>
+					<div class="col-lg-12">
+						<input formControlName="email" type="text" class="form-control" placeholder="Email">
+						<div *ngIf="email.invalid && (email.dirty || email.touched)">
+							<div *ngIf="email.errors?.['email']" style="color:red ;">Không đúng định dạng của email!
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Giới tính:</label>
+					<div class="col-lg-12">
+						<label class="radio-inline" style="margin-right:10px">
+							<input formControlName="gender" type="radio" class="styled" name="gender"
+								checked="checked" value="Nam">
+							Nam
+						</label>	
+
+						<label class="radio-inline">
+							<input formControlName="gender" type="radio" class="styled" name="gender"
+								value="Nữ">
+							Nữ
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Địa chỉ:</label>
+					<div class="col-lg-12">
+						<input formControlName="address" type="text" class="form-control" placeholder="Địa chỉ">
+						<div *ngIf="diachi.invalid && (diachi.dirty || diachi.touched)">
+							<div *ngIf="diachi.errors?.['required']" style="color:red ;">Địa chỉ không được rỗng</div>
+							<div *ngIf="diachi.errors?.['maxlength']" style="color:red ;">
+								Họ tên không được lớn hơn 250 ký tự
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Đóng</button>
+		  <button type="submit" class="btn btn-primary">Đặt lịch</button>
+		</div>
+	</form>
+	  </div>
+	</div>
+  </div>
